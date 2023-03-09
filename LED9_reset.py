@@ -45,6 +45,31 @@ def get_carbon_intensity():
     led.off()
     sta_if = network.WLAN(network.STA_IF)
     utime.sleep(1)
+    if sta_if.isconnected():
+        blinking(3)
+        requestUrl = 'https://api.co2signal.com/v1/latest?countryCode=DK-DK1'
+        headers = {'auth-token': 'TOKEN'}
+        response = urequests.get(requestUrl, headers=headers)
+        dataObject = response.json()
+        blinking(4)
+        sta_if.disconnect()
+        blinking(5)
+        utime.sleep(10)
+        if sta_if.isconnected():
+            blinking(6)
+        if not isinstance(dataObject, dict) and "data" not in dataObject:
+            #        blinking(4)
+            return 0
+        if "carbonIntensity" not in dataObject['data']:
+            #        blinking(5)
+            return 0
+        try:
+            float(dataObject['data']['carbonIntensity'])
+        except ValueError:
+            #        blinking(6)
+            return 0
+        blinking(7)
+        return dataObject['data']['carbonIntensity'] 
         return 0
         
 def scale(a1, a2, b1, b2, s):
