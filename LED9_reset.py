@@ -119,6 +119,21 @@ while True:
                 np.write()
             co2_skaleret_old = co2_skaleret
 # use old measurement:
+        else: 
+            for i in range(co2_skaleret_old):
+                np[i] = (brightness, 0, 0)
+                np.write()
+            for i in range(30-co2_skaleret_old):
+                np[int(co2_skaleret_old)+i] = (0, brightness, 0)
+                np.write()
+        # blink LED no 1:
+            for i in range(showBlink):
+                np[1] = (0, 0, brightness)
+                np.write()
+                utime.sleep_ms(5)
+                np[1] = (brightness, 0, 0)
+                np.write()
+                utime.sleep_ms(595)
 # Blink LED no 0 for remainder of 15 minutes:
         for i in range(1500-showBlink):
             np[0] = (0, 0, brightness)
