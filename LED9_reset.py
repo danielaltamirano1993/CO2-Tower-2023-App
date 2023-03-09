@@ -109,6 +109,16 @@ while True:
                     np[co2_skaleret_old] = (brightness, 0, 0)
                     np.write()
                     utime.sleep_ms(595)
+# permanently colour the red LEDs:
+            for i in range(co2_skaleret):
+                np[i] = (brightness, 0, 0)
+                np.write()
+# permanently colour the green LEDs:
+            for i in range(30-co2_skaleret):
+                np[co2_skaleret+i] = (0, brightness, 0)
+                np.write()
+            co2_skaleret_old = co2_skaleret
+# use old measurement:
 # Blink LED no 0 for remainder of 15 minutes:
         for i in range(1500-showBlink):
             np[0] = (0, 0, brightness)
