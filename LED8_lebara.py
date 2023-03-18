@@ -134,4 +134,22 @@ while True:
                     np.write()
                 utime.sleep_ms(500) 
 # new and old are identical:
+        if (co2_skaleret == co2_skaleret_old):
+            for i in range(showBlink):
+                np[co2_skaleret_old] = (0, 0, brightness)
+                np.write()
+                utime.sleep_ms(5)
+                np[co2_skaleret_old] = (brightness, 0, 0)
+                np.write()
+                utime.sleep_ms(595)
+# permanently colour the red LEDs:
+        for i in range(co2_skaleret):
+            np[i] = (brightness, 0, 0)
+            np.write()
+# permanently colour the green LEDs:
+        for i in range(30-co2_skaleret):
+            np[co2_skaleret+i] = (0, brightness, 0)
+            np.write()
+        co2_skaleret_old = co2_skaleret
+# use old measurement:
     
