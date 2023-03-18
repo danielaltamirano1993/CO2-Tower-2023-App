@@ -106,4 +106,32 @@ for i in range(30-co2_skaleret_old):
     np[co2_skaleret_old+i] = (0, brightness, 0)
     np.write()
     
+while True:
+    co2_level = get_carbon_intensity()
+    co2_skaleret = int(scale(50, 250, 0, 30, co2_level))
+# test if reading is valid:
+    if co2_level > 0:
+        # new datapoint is above previous:
+        if (co2_skaleret-co2_skaleret_old) > 0:
+            for i in range(showBlink):
+                for j in range(co2_skaleret-co2_skaleret_old):
+                    np[co2_skaleret_old + j] = (brightness, 0, 0)
+                    np.write()
+                utime.sleep_ms(100)
+                for j in range(co2_skaleret-co2_skaleret_old):
+                    np[co2_skaleret_old + j] = (0, brightness, 0)
+                    np.write()
+                utime.sleep_ms(500)
+# new datapoint is below previous:
+        if (co2_skaleret_old-co2_skaleret) > 0:
+            for i in range(showBlink):
+                for j in range(co2_skaleret_old-co2_skaleret):
+                    np[co2_skaleret_old - j] = (0, brightness, 0)
+                    np.write()
+                utime.sleep_ms(100)
+                for j in range(co2_skaleret_old-co2_skaleret):
+                    np[co2_skaleret_old - j] = (brightness, 0, 0)
+                    np.write()
+                utime.sleep_ms(500) 
+# new and old are identical:
     
