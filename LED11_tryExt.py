@@ -41,6 +41,15 @@ def blink_all(speed):
             np.write()
         
 
+def get_carbon_intensity():
+    led.off()
+    sta_if = network.WLAN(network.STA_IF)
+    sta_if.active(True)
+    if not sta_if.isconnected():
+        blinking(1)
+        sta_if.connect('AndroidAP', 'fbas2451')
+        led.on()
+        return 0
        
  
 def scale(a1, a2, b1, b2, s):
