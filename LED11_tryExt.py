@@ -173,3 +173,12 @@ while True:
             np[1] = (brightness, 0, 0)
             np.write()
             utime.sleep_ms(580)
+# Blink LED no 0 for remainder of 15 minutes:
+    for i in range(1500-showBlink):
+        np[0] = (0, 0, brightness)
+        np.write()
+        utime.sleep_ms(20)
+        np[0] = (brightness, 0, 0)
+        np.write()
+        utime.sleep_ms(580) 
+    
