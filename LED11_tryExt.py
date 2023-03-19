@@ -165,3 +165,11 @@ while True:
             for i in range(30-co2_skaleret_old):
                 np[int(co2_skaleret_old)+i] = (0, brightness, 0)
                 np.write()
+        # blink LED no 1:
+        for i in range(showBlink):
+            np[1] = (0, 0, brightness)
+            np.write()
+            utime.sleep_ms(20)
+            np[1] = (brightness, 0, 0)
+            np.write()
+            utime.sleep_ms(580)
