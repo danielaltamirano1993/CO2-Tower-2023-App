@@ -137,3 +137,12 @@ while True:
                     np[co2_skaleret_old - j] = (brightness, 0, 0)
                     np.write()
                 utime.sleep_ms(500) 
+# new and old are identical:
+        if (co2_skaleret == co2_skaleret_old):
+            for i in range(showBlink):
+                np[co2_skaleret_old] = (0, 0, brightness)
+                np.write()
+                utime.sleep_ms(20)
+                np[co2_skaleret_old] = (brightness, 0, 0)
+                np.write()
+                utime.sleep_ms(580)
