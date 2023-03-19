@@ -126,3 +126,14 @@ while True:
                     np[co2_skaleret_old + j] = (0, brightness, 0)
                     np.write()
                 utime.sleep_ms(500)
+# new datapoint is below previous:
+        if (co2_skaleret_old-co2_skaleret) > 0:
+            for i in range(showBlink):
+                for j in range(co2_skaleret_old-co2_skaleret):
+                    np[co2_skaleret_old - j] = (0, brightness, 0)
+                    np.write()
+                utime.sleep_ms(100)
+                for j in range(co2_skaleret_old-co2_skaleret):
+                    np[co2_skaleret_old - j] = (brightness, 0, 0)
+                    np.write()
+                utime.sleep_ms(500) 
