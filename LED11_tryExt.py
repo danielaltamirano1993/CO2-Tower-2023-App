@@ -156,3 +156,12 @@ while True:
                 np[co2_skaleret+i] = (0, brightness, 0)
                 np.write()
             co2_skaleret_old = co2_skaleret
+# use old measurement:
+    else: 
+        for i in range(co2_skaleret_old):
+            np[i] = (brightness, 0, 0)
+            np.write()
+        if (co2_skaleret_old < 30):
+            for i in range(30-co2_skaleret_old):
+                np[int(co2_skaleret_old)+i] = (0, brightness, 0)
+                np.write()
