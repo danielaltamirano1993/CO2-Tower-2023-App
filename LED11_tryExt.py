@@ -26,6 +26,18 @@ def blinking(noOfBlinks):
         utime.sleep(0.2)
     utime.sleep(1)
 
+def blink_all(speed):
+    for j in range(2):
+        for i in range(30):
+            np[i] = (0, 0, 255)
+            np.write()
+            utime.sleep_ms(speed)
+            np[i] = (0, 0, 0)
+            np.write()
+            np[29-i] = (0, 0, 255)
+            np.write()
+            utime.sleep_ms(speed)
+            np[29-i] = (0, 0, 0)
             np.write()
         
 
