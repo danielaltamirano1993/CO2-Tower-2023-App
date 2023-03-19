@@ -146,3 +146,7 @@ while True:
                 np[co2_skaleret_old] = (brightness, 0, 0)
                 np.write()
                 utime.sleep_ms(580)
+# permanently colour the red LEDs:
+        for i in range(co2_skaleret):
+            np[i] = (brightness, 0, 0)
+            np.write()
