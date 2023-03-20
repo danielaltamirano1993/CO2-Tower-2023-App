@@ -39,6 +39,17 @@ def blink_all(speed):
             np.write()
         
 
+def get_carbon_intensity():
+    led.off()
+    sta_if = network.WLAN(network.STA_IF)
+    utime.sleep(1)
+    if sta_if.isconnected():
+        blinking(1)
+    sta_if.active(True)
+    utime.sleep(1)
+    sta_if.connect('YOUR AP SSID', 'PASSWORD')
+    utime.sleep(10)
+    blinking(2)
         
 def scale(a1, a2, b1, b2, s):
     return (b1 + ((s - a1) * (b2-b1) / (a2-a1)))
