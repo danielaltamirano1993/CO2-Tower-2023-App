@@ -99,4 +99,9 @@ for i in range(30-co2_skaleret_old):
     np[co2_skaleret_old+i] = (0, brightness, 0)
     np.write()
     
+while True:
+    co2_level = get_carbon_intensity()
+    co2_skaleret = int(scale(0, 400, 0, 30, co2_level))
+# test if reading is valid:
+    if co2_level > 0:
     
