@@ -12,3 +12,5 @@ def get_carbon_intensity():
     dataObject = response.json()
 
 
+co2_level = get_carbon_intensity()
+print (co2_level)
