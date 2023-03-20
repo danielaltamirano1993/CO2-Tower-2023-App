@@ -50,6 +50,34 @@ def get_carbon_intensity():
     sta_if.connect('YOUR AP SSID', 'PASSWORD')
     utime.sleep(10)
     blinking(2)
+    if sta_if.isconnected():
+        blinking(3)
+        requestUrl = 'https://api.co2signal.com/v1/latest?countryCode=DK-DK1'
+        headers = {'auth-token': 'YOUR TOKEN'}
+        response = urequests.get(requestUrl, headers=headers)
+        dataObject = response.json()
+        blinking(4)
+        sta_if.disconnect()
+        blinking(5)
+        utime.sleep(10)
+        if sta_if.isconnected():
+            blinking(6)
+        if not isinstance(dataObject, dict) and "data" not in dataObject:
+            #        blinking(4)
+            return 0
+        if "carbonIntensity" not in dataObject['data']:
+            #        blinking(5)
+            return 0
+        try:
+            float(dataObject['data']['carbonIntensity'])
+        except ValueError:
+            #        blinking(6)
+            return 0
+        blinking(7)
+        return dataObject['data']['carbonIntensity'] 
+    else:
+        led.on()
+        return 0
         
 def scale(a1, a2, b1, b2, s):
     return (b1 + ((s - a1) * (b2-b1) / (a2-a1)))
